@@ -26,7 +26,6 @@ var ConditionEnum = {
   }
 };
 
-
 Record.prototype = {
   setCondition: function(newCondition) {
     this.condition = newCondition;

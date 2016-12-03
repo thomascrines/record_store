@@ -42,6 +42,11 @@ RecordStore.prototype = {
     this.balance += record.price;
   },
 
+  sellRecordToTrader: function(record, trader) {
+    this.sellRecord(record);
+    trader.addRecord(record);
+  },
+
   returnTotalValueOfInventory: function() {
     this.totalValue = 0;
     this.inventory.forEach(function(record) {
