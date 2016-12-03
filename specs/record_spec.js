@@ -21,4 +21,17 @@ describe('Record function', function() {
     assert.equal(9.00, record1.price);
   });
 
+  it('has condition', function() {
+    assert.equal(1, record1.condition)
+  });
+
+  it('has condition', function() {
+    assert.equal('mint', record1.returnConditionName())
+  });
+
+  it('can set condition', function() {
+    record1.setCondition(6);
+    assert.equal('good', record1.returnConditionName());
+  })
+
 });

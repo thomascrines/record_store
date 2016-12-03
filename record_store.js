@@ -25,20 +25,35 @@ RecordStore.prototype = {
     return searchedRecord;
   },
 
-  // returnInventoryContents: function() {
-  //   this.inventory.forEach(function(record) {
-  //     return (record.artist + ' | ' + record.title + ' | £' + record.price);
-  //   });
-  // },
+  returnInventoryContents: function() {
+    this.inventoryList = "Contents:\n",
+    this.inventory.forEach(function(record) {
+      this.inventoryList += (record.artist + ' | ' + record.title + ' | £' + record.price + '\n');
+    }.bind(this));
+    return this.inventoryList;
+  },
 
   sellRecord: function(record) {
-      var searchedRecord = this.inventory.find(function(searchedRecord) {
-        return searchedRecord === record;
-      });
-      var index = this.inventory.indexOf(searchedRecord)
-      this.inventory.splice(index);
-      this.balance += record.price;
-    },
-  };
+    var searchedRecord = this.inventory.find(function(searchedRecord) {
+      return searchedRecord === record;
+    });
+    var index = this.inventory.indexOf(searchedRecord)
+    this.inventory.splice(index);
+    this.balance += record.price;
+  },
 
-  module.exports = RecordStore;
+  returnTotalValueOfInventory: function() {
+    this.totalValue = 0;
+    this.inventory.forEach(function(record) {
+      this.totalValue += record.price;
+    }.bind(this));
+    return this.totalValue;
+  },
+
+  returnTotalAssets: function() {
+    return 'Total Cash: ' + this.balance + '\nTotal Value of Inventory: ' + this.returnTotalValueOfInventory() + '\nTotal Value of Assets: ' + (this.balance + this.returnTotalValueOfInventory());
+  }
+
+};
+
+module.exports = RecordStore;

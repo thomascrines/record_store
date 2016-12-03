@@ -43,16 +43,26 @@ describe('Record store function', function() {
     assert.equal(record1, recordStore.findRecordByArtist('George Michael'));
   });
 
-  // it('can return inventory', function() {
-  //   recordStore.addRecord(record1);
-  //   assert.equal('George Michael | Faith | £9.00', recordStore.returnInventoryContents());
-  // });
+  it('can return inventory', function() {
+    recordStore.addRecord(record1);
+    assert.equal('Contents:\nGeorge Michael | Faith | £9\n', recordStore.returnInventoryContents());
+  });
 
   it('can sell record', function() {
     recordStore.addRecord(record1);
     recordStore.sellRecord(record1)
     assert.equal(0, recordStore.inventory.length);
     assert.equal(354.67, recordStore.balance);
-  })
+  });
+
+  it('can return total value of inventory', function() {
+    recordStore.addRecord(record1);
+    assert.equal(9, recordStore.returnTotalValueOfInventory());
+  });
+
+  it('can return total assets', function() {
+    recordStore.addRecord(record1);
+    assert.equal('Total Cash: 345.67\nTotal Value of Inventory: 9\nTotal Value of Assets: 354.67', recordStore.returnTotalAssets());
+  });
 
 });
