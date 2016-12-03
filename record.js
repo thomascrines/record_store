@@ -5,11 +5,11 @@ var Record = function(artist, title, price) {
 };
 
 
-Record.prototype = {
-  talk: function() {
-    return("I am " + this.name + ".");
-  },
+// Record.prototype = {
+//   // talk: function() {
+//   //   return("I am " + this.name + ".");
+//   // },
 
-  };
+//   };
 
   module.exports = Record;

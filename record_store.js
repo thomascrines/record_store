@@ -7,9 +7,16 @@ var RecordStore = function(name, location, balance) {
 
 
 RecordStore.prototype = {
-  talk: function() {
-    return("I am " + this.name + ".");
+  addRecord: function(record) {
+    this.inventory.push(record);
   },
+
+  findRecordByTitle: function(title) {
+        var searchedRecord = this.inventory.find( function(searchedRecord) {
+          return searchedRecord.title === title;
+        })
+        return searchedRecord;
+      }, 
 
   };
 
