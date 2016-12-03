@@ -23,8 +23,22 @@ RecordStore.prototype = {
       return searchedRecord.artist === name;
     });
     return searchedRecord;
-  } 
+  },
 
-};
+  // returnInventoryContents: function() {
+  //   this.inventory.forEach(function(record) {
+  //     return (record.artist + ' | ' + record.title + ' | £' + record.price);
+  //   });
+  // },
 
-module.exports = RecordStore;
+  sellRecord: function(record) {
+      var searchedRecord = this.inventory.find(function(searchedRecord) {
+        return searchedRecord === record;
+      });
+      var index = this.inventory.indexOf(searchedRecord)
+      this.inventory.splice(index);
+      this.balance += record.price;
+    },
+  };
+
+  module.exports = RecordStore;

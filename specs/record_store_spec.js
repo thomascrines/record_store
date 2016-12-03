@@ -43,4 +43,16 @@ describe('Record store function', function() {
     assert.equal(record1, recordStore.findRecordByArtist('George Michael'));
   });
 
+  // it('can return inventory', function() {
+  //   recordStore.addRecord(record1);
+  //   assert.equal('George Michael | Faith | £9.00', recordStore.returnInventoryContents());
+  // });
+
+  it('can sell record', function() {
+    recordStore.addRecord(record1);
+    recordStore.sellRecord(record1)
+    assert.equal(0, recordStore.inventory.length);
+    assert.equal(354.67, recordStore.balance);
+  })
+
 });
