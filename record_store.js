@@ -5,7 +5,6 @@ var RecordStore = function(name, location, balance) {
   this.inventory = [];
 };
 
-
 RecordStore.prototype = {
   addRecord: function(record) {
     this.inventory.push(record);
@@ -42,9 +41,20 @@ RecordStore.prototype = {
     this.balance += record.price;
   },
 
+  buyRecord: function(record) {
+    this.inventory.push(record);
+    this.balance -= record.price;
+  },
+
   sellRecordToTrader: function(record, trader) {
     this.sellRecord(record);
-    trader.addRecord(record);
+    trader.buyRecord(record);
+  },
+
+  buyRecordFromTrader: function(record, trader) {
+    record.setPriceByCondition();
+    trader.sellRecord(record);
+    this.buyRecord(record);
   },
 
   returnTotalValueOfInventory: function() {

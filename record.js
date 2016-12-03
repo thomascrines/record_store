@@ -33,6 +33,10 @@ Record.prototype = {
 
   returnConditionName: function() {
     return ConditionEnum.properties[this.condition].name;
+  },
+
+  setPriceByCondition: function() {
+    this.price = this.price * (1 / this.condition);
   }
 
 };
