@@ -38,4 +38,9 @@ describe('Record store function', function() {
     assert.equal(record1, recordStore.findRecordByTitle('Faith'));
   });
 
+  it('find record by artist', function(){
+    recordStore.addRecord(record1);
+    assert.equal(record1, recordStore.findRecordByArtist('George Michael'));
+  });
+
 });

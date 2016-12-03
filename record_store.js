@@ -12,12 +12,19 @@ RecordStore.prototype = {
   },
 
   findRecordByTitle: function(title) {
-        var searchedRecord = this.inventory.find( function(searchedRecord) {
-          return searchedRecord.title === title;
-        })
-        return searchedRecord;
-      }, 
+    var searchedRecord = this.inventory.find(function(searchedRecord) {
+      return searchedRecord.title === title;
+    });
+    return searchedRecord;
+  },
 
-  };
+  findRecordByArtist: function(name) {
+    var searchedRecord = this.inventory.find(function(searchedRecord) {
+      return searchedRecord.artist === name;
+    });
+    return searchedRecord;
+  } 
 
-  module.exports = RecordStore;
+};
+
+module.exports = RecordStore;
