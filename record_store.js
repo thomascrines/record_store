@@ -10,6 +10,13 @@ RecordStore.prototype = {
     this.inventory.push(record);
   },
 
+  findRecord: function(record) {
+    var searchedRecord = this.inventory.find(function(searchedRecord) {
+      return searchedRecord === record;
+    });
+    return searchedRecord;
+  },
+
   findRecordByTitle: function(title) {
     var searchedRecord = this.inventory.find(function(searchedRecord) {
       return searchedRecord.title === title;
@@ -27,7 +34,7 @@ RecordStore.prototype = {
   returnInventoryContents: function() {
     this.inventoryList = "Contents:\n",
     this.inventory.forEach(function(record) {
-      this.inventoryList += (record.artist + ' | ' + record.title + ' | £' + record.price + '\n');
+      this.inventoryList += record.returnAsString();
     }.bind(this));
     return this.inventoryList;
   },

@@ -26,18 +26,22 @@ describe('Record function', function() {
   });
 
   it('has condition name', function() {
-    assert.equal('mint', record1.returnConditionName())
+    assert.equal('Mint', record1.returnConditionName())
   });
 
   it('can set condition', function() {
     record1.setCondition(6);
-    assert.equal('good', record1.returnConditionName());
+    assert.equal('Good', record1.returnConditionName());
   });
 
   it('can set price by condition', function() {
     record1.setCondition(6);
     record1.setPriceByCondition();
     assert.equal(1.50, record1.price);
+  });
+
+  it('can return as string', function() {
+    assert.equal('Artist: George Michael\nTitle: Faith\nPrice: £9\nCondition: Mint\nQuantity: 1\n\n', record1.returnAsString());
   })
 
 });

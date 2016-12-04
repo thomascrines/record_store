@@ -46,6 +46,11 @@ describe('Record store function', function() {
     assert.equal(1, recordStore.inventory.length);
   });
 
+  it('find record', function(){
+    recordStore.addRecord(record1);
+    assert.equal(record1, recordStore.findRecord(record1));
+  });
+
   it('find record by title', function(){
     recordStore.addRecord(record1);
     assert.equal(record1, recordStore.findRecordByTitle('Faith'));
@@ -59,10 +64,7 @@ describe('Record store function', function() {
   it('can return inventory', function() {
     recordStore.addRecord(record1);
     recordStore.addRecord(record2);
-    recordStore.addRecord(record3);
-    recordStore.addRecord(record4);
-    recordStore.addRecord(record5);
-    assert.equal('Contents:\nGeorge Michael | Faith | £9.9\nWu Tang Clan | Once Upon a Time in Shaolin | £2000000\nThe Velvet Undeground & Nico | The Velvet Undeground & Nico | £25200\nUnder the Influence | Status Quo | £19.99\nRush | Radio Spirits | £29.99\n', recordStore.returnInventoryContents());
+    assert.equal('Contents:\nArtist: George Michael\nTitle: Faith\nPrice: £9.9\nCondition: Mint\nQuantity: 1\n\nArtist: Wu Tang Clan\nTitle: Once Upon a Time in Shaolin\nPrice: £2000000\nCondition: Mint\nQuantity: 1\n\n', recordStore.returnInventoryContents());
   });
 
   it('can sell record', function() {

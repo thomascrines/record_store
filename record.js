@@ -3,6 +3,7 @@ var Record = function(artist, title, price) {
   this.title = title;
   this.price = price;
   this.condition = ConditionEnum.MINT;
+  this.quantity = 1;
 };
 
 var ConditionEnum = {
@@ -15,14 +16,14 @@ var ConditionEnum = {
   FAIR: 7,
   POOR: 8,
   properties: {
-    1: {name: "mint", value: 1},
-    2: {name: "near mint", value: 2},
-    3: {name: "excellent", value: 3},
-    4: {name: "very good plus", value: 4},
-    5: {name: "very good", value: 5},
-    6: {name: "good", value: 6},
-    7: {name: "fair", value: 7},
-    8: {name: "poor", value: 8}
+    1: {name: "Mint", value: 1},
+    2: {name: "Near Mint", value: 2},
+    3: {name: "Excellent", value: 3},
+    4: {name: "Very Good +", value: 4},
+    5: {name: "Very Good", value: 5},
+    6: {name: "Good", value: 6},
+    7: {name: "Fair", value: 7},
+    8: {name: "Poor", value: 8}
   }
 };
 
@@ -37,6 +38,10 @@ Record.prototype = {
 
   setPriceByCondition: function() {
     this.price = this.price * (1 / this.condition);
+  },
+
+  returnAsString: function() {
+    return ('Artist: ' + this.artist + '\nTitle: ' + this.title + '\nPrice: £' + this.price + '\nCondition: ' + ConditionEnum.properties[this.condition].name + '\nQuantity: ' + this.quantity + '\n\n');
   }
 
 };
