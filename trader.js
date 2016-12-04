@@ -23,6 +23,7 @@ Trader.prototype = {
     this.collection.splice(index);
     this.funds += record.price;
   },
+
 };
 
 module.exports = Trader;

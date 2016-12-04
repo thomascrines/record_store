@@ -11,16 +11,18 @@ describe('Record store function', function() {
   var record3;
   var record4;
   var record5;
-  var trader;
+  var trader1;
+  var trader2;
 
   beforeEach(function() {
     recordStore = new RecordStore('Tower Records', 'Hamilton', 300.00);
-    record1 = new Record('George Michael', 'Faith', 9.89);
+    record1 = new Record('George Michael', 'Faith', 9.90);
     record2 = new Record('Wu Tang Clan', 'Once Upon a Time in Shaolin', 2000000.00);
     record3 = new Record('The Velvet Undeground & Nico', 'The Velvet Undeground & Nico', 25200.00);
     record4 = new Record('Under the Influence', 'Status Quo', 19.99);
     record5 = new Record('Rush', 'Radio Spirits', 29.99);
-    trader = new Trader('High Tower', 200.00);
+    trader1 = new Trader('High Tower', 200.00);
+    trader2 = new Trader('Mahoney', 200.00);
   });
 
   it('has name', function() {
@@ -60,50 +62,60 @@ describe('Record store function', function() {
     recordStore.addRecord(record3);
     recordStore.addRecord(record4);
     recordStore.addRecord(record5);
-    assert.equal('Contents:\nGeorge Michael | Faith | £9.89\nWu Tang Clan | Once Upon a Time in Shaolin | £2000000\nThe Velvet Undeground & Nico | The Velvet Undeground & Nico | £25200\nUnder the Influence | Status Quo | £19.99\nRush | Radio Spirits | £29.99\n', recordStore.returnInventoryContents());
+    assert.equal('Contents:\nGeorge Michael | Faith | £9.9\nWu Tang Clan | Once Upon a Time in Shaolin | £2000000\nThe Velvet Undeground & Nico | The Velvet Undeground & Nico | £25200\nUnder the Influence | Status Quo | £19.99\nRush | Radio Spirits | £29.99\n', recordStore.returnInventoryContents());
   });
 
   it('can sell record', function() {
     recordStore.addRecord(record1);
     recordStore.sellRecord(record1)
     assert.equal(0, recordStore.inventory.length);
-    assert.equal(309.89, recordStore.balance);
+    assert.equal(309.9, recordStore.balance);
   });
 
   it('can buy record', function() {
     recordStore.buyRecord(record1);
     assert.equal(1, recordStore.inventory.length);
-    assert.equal(290.11, recordStore.balance);
+    assert.equal(290.1, recordStore.balance);
   });
 
   it('can sell record to Trader', function() {
     recordStore.addRecord(record1);
-    recordStore.sellRecordToTrader(record1, trader)
+    recordStore.sellRecordToTrader(record1, trader1)
     assert.equal(0, recordStore.inventory.length);
-    assert.equal(309.89, recordStore.balance);
-    assert.equal(190.11, trader.funds);
-    assert.equal(record1, trader.collection[0]);
+    assert.equal(309.9, recordStore.balance);
+    assert.equal(190.1, trader1.funds);
+    assert.equal(record1, trader1.collection[0]);
   });
 
   it('can buy record from trader', function() {
-    trader.addRecord(record1);
-    recordStore.buyRecord(record1, trader);
+    trader1.addRecord(record1);
+    recordStore.buyRecord(record1, trader1);
     assert.equal(1, recordStore.inventory.length);
-    assert.equal(290.11, recordStore.balance);
-  })
+    assert.equal(290.1, recordStore.balance);
+  });
+
+  it('can arrange private sale', function() {
+    trader1.addRecord(record1);
+    recordStore.arrangePrivateSale(trader1, trader2, record1);
+    assert.equal(208.91, trader1.funds);
+    assert.equal(0, trader1.collection.length);
+    assert.equal(190.1, trader2.funds);
+    assert.equal(record1, trader2.collection[0]);
+    assert.equal(300.99, recordStore.balance);
+  });
 
   it('can return total value of inventory', function() {
     recordStore.addRecord(record1);
     recordStore.addRecord(record2);
     recordStore.addRecord(record3);
-    assert.equal(2025209.89, recordStore.returnTotalValueOfInventory());
+    assert.equal(2025209.9, recordStore.returnTotalValueOfInventory());
   });
 
   it('can return total assets', function() {
     recordStore.addRecord(record1);
     recordStore.addRecord(record2);
     recordStore.addRecord(record3);
-    assert.equal('Total Cash: 300\nTotal Value of Inventory: 2025209.89\nTotal Value of Assets: 2025509.89', recordStore.returnTotalAssets());
+    assert.equal('Total Cash: 300\nTotal Value of Inventory: 2025209.9\nTotal Value of Assets: 2025509.9', recordStore.returnTotalAssets());
   });
 
 });

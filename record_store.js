@@ -57,6 +57,14 @@ RecordStore.prototype = {
     this.buyRecord(record);
   },
 
+  arrangePrivateSale: function(sellingTrader, buyingTrader, record) {
+    sellingTrader.sellRecord(record);
+    buyingTrader.buyRecord(record);
+    var commission = record.price * 0.1;
+    this.balance += commission;
+    sellingTrader.funds -= commission;
+  },
+
   returnTotalValueOfInventory: function() {
     this.totalValue = 0;
     this.inventory.forEach(function(record) {
